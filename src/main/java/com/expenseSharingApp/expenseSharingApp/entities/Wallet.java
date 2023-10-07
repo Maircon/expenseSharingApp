@@ -26,6 +26,8 @@ public class Wallet {
   @GeneratedValue(strategy = GenerationType.UUID)
   @Column(name = "id_wallet")
   private String id;
+
+  @Column(name = "balance")
   private BigDecimal balance;
   
   @OneToOne
