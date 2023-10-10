@@ -41,7 +41,8 @@ public class ExpenseService {
         return expense;
     }
 
-    public List<ExpenseConfig> getExpenses() {
-        return expenseConfigRepository.findAll();
+    public List<ExpenseConfig> getExpenses(String idUser) {
+        var user = userRepository.findById(idUser).orElseThrow();
+        return expenseConfigRepository.findByUser(user);
     }
 }

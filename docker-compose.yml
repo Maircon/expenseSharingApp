@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  app:
+    build: .
+    image: 'expense_sharing_app'
+    container_name: expense_app
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/pg
+      SPRING_DATASOURCE_USERNAME: pg-user
+      SPRING_DATASOURCE_PASSWORD: pg-password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: pg-user
+      POSTGRES_PASSWORD: pg-password
+      POSTGRES_DB: pg
