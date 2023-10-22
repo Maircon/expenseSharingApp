@@ -17,7 +17,7 @@ public class PaymentController {
     private PaymentService paymentService;
 
     @PostMapping
-    public ResponseEntity<Payment> pay (@RequestBody PaymentDTO pay) {
+    public ResponseEntity<Payment> pay (@RequestBody PaymentDTO pay) throws Exception {
         return new ResponseEntity<>(paymentService.pay(pay), HttpStatus.OK);
     }
 

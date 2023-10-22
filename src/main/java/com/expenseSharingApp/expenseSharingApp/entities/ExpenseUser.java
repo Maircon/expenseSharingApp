@@ -8,16 +8,16 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Entity(name = "expense_config")
-@Table(name = "expense_config")
+@Entity(name = "expense_users")
+@Table(name = "expense_users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
-public class ExpenseConfig {
+public class ExpenseUser {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id_expense_config")
+    @Column(name = "id_expense_user")
     private String id;
 
     @ManyToOne

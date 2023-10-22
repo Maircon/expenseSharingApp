@@ -9,8 +9,8 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity(name = "payment")
-@Table(name = "payment")
+@Entity(name = "payments")
+@Table(name = "payments")
 @Setter
 @Getter
 @AllArgsConstructor
@@ -32,6 +32,6 @@ public class Payment {
     private PaymentType paymentType;
 
     @ManyToOne
-    @JoinColumn(name = "id_expense", referencedColumnName = "id_expense")
-    private Expense expense;
+    @JoinColumn(name = "id_expense_user", referencedColumnName = "id_expense_user")
+    private ExpenseUser expenseUser;
 }

@@ -2,10 +2,10 @@ package com.expenseSharingApp.expenseSharingApp.services;
 
 import com.expenseSharingApp.expenseSharingApp.dtos.CreateExpenseDTO;
 import com.expenseSharingApp.expenseSharingApp.entities.Expense;
-import com.expenseSharingApp.expenseSharingApp.entities.ExpenseConfig;
-import com.expenseSharingApp.expenseSharingApp.repositories.ExpenseConfigRepository;
-import com.expenseSharingApp.expenseSharingApp.repositories.ExpenseRepository;
+import com.expenseSharingApp.expenseSharingApp.entities.ExpenseUser;
 import com.expenseSharingApp.expenseSharingApp.repositories.UserRepository;
+import com.expenseSharingApp.expenseSharingApp.repositories.ExpenseUserRepository;
+import com.expenseSharingApp.expenseSharingApp.repositories.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class ExpenseService {
     private ExpenseRepository expenseRepository;
 
     @Autowired
-    ExpenseConfigRepository expenseConfigRepository;
+    ExpenseUserRepository expenseUserRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -31,18 +31,18 @@ public class ExpenseService {
         expenseRepository.save(expense);
 
         expenseDTO.expensesByUser().forEach(user -> {
-            ExpenseConfig expenseConfig = new ExpenseConfig();
-            expenseConfig.setUser(userRepository.findById(user.idUser()).orElseThrow());
-            expenseConfig.setExpense(expense);
-            expenseConfig.setPercent(BigDecimal.valueOf(user.percent()));
-            expenseConfigRepository.save(expenseConfig);
+            ExpenseUser expenseUser = new ExpenseUser();
+            expenseUser.setUser(userRepository.findById(user.idUser()).orElseThrow());
+            expenseUser.setExpense(expense);
+            expenseUser.setPercent(BigDecimal.valueOf(user.percent()));
+            expenseUserRepository.save(expenseUser);
         });
 
         return expense;
     }
 
-    public List<ExpenseConfig> getExpenses(String idUser) {
+    public List<ExpenseUser> getExpenses(String idUser) {
         var user = userRepository.findById(idUser).orElseThrow();
-        return expenseConfigRepository.findByUser(user);
+        return expenseUserRepository.findByUser(user);
     }
 }

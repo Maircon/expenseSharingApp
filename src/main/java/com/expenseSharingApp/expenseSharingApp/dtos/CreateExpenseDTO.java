@@ -3,5 +3,5 @@ package com.expenseSharingApp.expenseSharingApp.dtos;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public record CreateExpenseDTO(BigDecimal value, ArrayList<ExpenseConfigDTO> expensesByUser) {
+public record CreateExpenseDTO(BigDecimal value, ArrayList<ExpenseUserDTO> expensesByUser) {
 }
